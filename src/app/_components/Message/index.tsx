@@ -1,5 +1,6 @@
 "use client";
 import { MessageType } from "@/app/page";
+import { format } from "date-fns";
 
 type MessageProps = {
   message: MessageType;
@@ -13,7 +14,7 @@ const UserIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-6 ml-auto"
+      className="size-6 ml-auto text-yellow"
     >
       <path
         strokeLinecap="round"
@@ -32,7 +33,7 @@ const MechIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-6 mr-2"
+      className="size-6 mr-2 text-teal"
     >
       <path
         strokeLinecap="round"
@@ -45,11 +46,22 @@ const MechIcon = () => {
 
 const Message = (props: MessageProps) => {
   const { message } = props;
+  console.log(message, "------m");
   return (
-    <div className="flex flex-row border-2 border-red bg-yellow min-h-20 p-2 rounded-lg">
-      {message.type === "resp" && <MechIcon />}
-      <div>{message.message}</div>
-      {message.type === "user" && <UserIcon />}
+    <div
+      className={`flex flex-row border-2 border-blue  min-h-20 p-2 rounded-lg flex flex-col relative ${
+        message.type === "resp" ? "bg-navy text-pink" : "bg-lightNavy"
+      }`}
+    >
+      <div className="flex flex-row">
+        {message.type === "resp" && <MechIcon />}
+        <div className="overflow-y-auto">{message.message}</div>
+        {message.type === "user" && <UserIcon />}
+      </div>
+
+      <div className="absolute right-0 bottom-0 text-xs">
+        {format(message.createdAt, "MM/dd/yyyy h:m:s a")}
+      </div>
     </div>
   );
 };
