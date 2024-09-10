@@ -46,9 +46,10 @@ const MechIcon = () => {
 const Message = (props: MessageProps) => {
   const { message } = props;
   return (
-    <div>
-      <div>{message.type === "resp" ? <MechIcon /> : <UserIcon />}</div>
+    <div className="flex flex-row border-2 border-red bg-yellow min-h-20">
+      {message.type === "resp" && <MechIcon />}
       <div>{message.message}</div>
+      {message.type === "user" && <UserIcon />}
     </div>
   );
 };
