@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Input from "./_components/Input";
 import Message from "./_components/Message";
+import LoadingDots from "./_components/LoadingDots";
 
 export type MessageType = {
   type: string;
@@ -13,9 +14,10 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
   return (
     <div className="flex flex-col px-12 h-full py-8">
-      <div className="bg-red h-5/6 overflow-auto flex flex-col justify-end">
+      <div className="bg-medNavy rounded-xl px-4 h-5/6 overflow-auto flex flex-col justify-end pb-2">
         {messages &&
           messages.map((m, idx) => <Message key={idx} message={m} />)}
+        <div className="h-4">{loading && <LoadingDots />}</div>
       </div>
       <div className="h-1/6 flex items-center">
         <Input

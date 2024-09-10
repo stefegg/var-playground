@@ -14,15 +14,25 @@ type InputProps = {
 const Input = (props: InputProps) => {
   const [value, setValue] = useState("");
   const { width, messages, setMessages, loading, setLoading } = props;
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !loading) {
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !loading && value.length > 0) {
+      const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
       setValue("");
-      const newMesssages = [
-        ...messages,
-        { type: "user", message: e.currentTarget.value },
-      ];
-      setMessages(newMesssages);
+      const userMsg = {
+        type: "user",
+        message: e.currentTarget.value,
+      };
+      let newMessages = [...messages, userMsg];
+      setMessages(newMessages);
       setLoading(true);
+      await delay(2000);
+      newMessages = [
+        ...messages,
+        userMsg,
+        { type: "resp", message: "I am a response!" },
+      ];
+      setMessages(newMessages);
+      setLoading(false);
     }
   };
   return (
