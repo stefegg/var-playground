@@ -13,7 +13,7 @@ const UserIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-6"
+      className="size-6 ml-auto"
     >
       <path
         strokeLinecap="round"
@@ -32,7 +32,7 @@ const MechIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="size-6"
+      className="size-6 mr-2"
     >
       <path
         strokeLinecap="round"
@@ -46,7 +46,7 @@ const MechIcon = () => {
 const Message = (props: MessageProps) => {
   const { message } = props;
   return (
-    <div className="flex flex-row border-2 border-red bg-yellow min-h-20">
+    <div className="flex flex-row border-2 border-red bg-yellow min-h-20 p-2 rounded-lg">
       {message.type === "resp" && <MechIcon />}
       <div>{message.message}</div>
       {message.type === "user" && <UserIcon />}
